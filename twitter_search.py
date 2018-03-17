@@ -33,4 +33,7 @@ SListener = MyStreamListener()
 theStream = tweepy.Stream(auth = api.auth, listener=SListener)
 
 theStream.filter(track=['democrats','democrat',
-                       'republicans','republican'], async=True)
+                        'republicans','republican',
+                        'to:TheDemocrats','@TheDemocrats',
+                        'to:GOP','@GOP', 'to:HouseGOP', '@HouseGOP',
+                        'politics filter -:safe'], async=True)
