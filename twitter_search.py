@@ -4,32 +4,19 @@ from db_connect import *
 import tweepy
 import json
 import sys
-<<<<<<< HEAD
 import re
-=======
->>>>>>> a999c6f047728d8466a1db8d7fe642df7dc76736
 
 
 class MyStreamListener(tweepy.StreamListener):
 
     def on_status(self, status):
         try:
-<<<<<<< HEAD
             if status._json['text'][:2] == 'RT':
                 status._json['text'] = re.match(r'.*:(.*)' , status._json['text']).group(1)
             insert_row(status._json['text'],
                       status._json['user']['location'],
                       status._json['user']['followers_count'])
         except (KeyboardInterrupt, SystemExit):
-=======
-            cur_1 = get_db_connection().cursor()
-            insert_row(status._json['text'],
-                       status._json['user']['location'],
-                       status._json['user']['followers_count'], cur_1)
-        except (KeyboardInterrupt, SystemExit):
-            get_db_connection().commit()
-            get_db_connection().close()
->>>>>>> a999c6f047728d8466a1db8d7fe642df7dc76736
             sys.exit()
 
 consumer_key = "b6DRufuzlz7fGdoNe2ixrQnwv"
@@ -42,8 +29,8 @@ auth.set_access_token(access_token, access_secret)
 
 api = tweepy.API(auth)
 
-myStreamListener = MyStreamListener()
-myStream = tweepy.Stream(auth = api.auth, listener=myStreamListener)
+SListener = MyStreamListener()
+theStream = tweepy.Stream(auth = api.auth, listener=SListener)
 
-myStream.filter(track=['democrats','democrat',
+theStream.filter(track=['democrats','democrat',
                        'republicans','republican'], async=True)
